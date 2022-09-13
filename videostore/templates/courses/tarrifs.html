@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="form-section container">
+        {% if user.is_autheticated == False or user.profile.account_type == 'free' %}
+        <h2>Купите подписку на сайте</h2>
+        <p>Подписка даст доступ ко всем платным курсам</p>
+        <button class="btn btn-danger">Купить подписку (15$)</button>
+        {% else %}
+        <p>У вас полный доступ к курсам</p>
+        {% endif %}
+    </div>
+{% endblock %}

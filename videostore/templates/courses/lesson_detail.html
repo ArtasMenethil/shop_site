@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="courses container">
+        <div class="course">
+            {% if object.image %}
+            <img src="{{ object.image.url }}" alt="{{ object.title }}">
+            {% else %}
+            <img src="pictures/default.jpg" alt="{{ object.title }}">
+            {% endif %}
+
+            <h3> {{ object.title }} </h3>
+
+        </div>
+
+        <div class="aside">
+            <h1>Видео урок - {{ lesson.title }}</h1>
+
+            {% if object.is_free == True or user.profile.account_type == 'full' %}
+                <p> {{ lesson.description }} </p>
+                <iframe width="560" height="315" src="{{ lesson.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% else %}
+                    <p>Необходимо купить <a href="{% url 'tarrifs' %}">подписку</a></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% load crispy_form_tags %}
+        <form method="post">
+            {%csrf token%}
+            {{ commForm|crispy }}
+            <button type="submit" class="btn btn-danger">Добавить</button>
+        </form>
+        <br>
+        <h2>Другие комментарии</h2>
+        {% for comm in comments %}
+            <div class="alert alert-warning">
+                <p> <b> Текст сообщения: </b> </p>
+                <p>{{ comm.comment }}</p>
+                <p> <b> Автор: </b>{{ comm.author_com }} </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

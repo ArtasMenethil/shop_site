@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="courses container">
+        {% for el in courses %}
+            <div class="course">
+
+                {% if el.image %}
+                 <img src="{{ el.image.url }}" alt="{{ el.title }}">
+                {% else %}
+                <img src="pictures/default.jpg" alt="{{ el.title }}">
+                {% endif %}
+
+                <h3> {{ el.title }} </h3>
+                <a href="{{el.get_absolute_url}}">Смотреть курс</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

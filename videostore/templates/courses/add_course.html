@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="course_add container">
+        <h1>Добавление нового курса</h1>
+        <div class="course_add_first">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-warning">Добавить</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
